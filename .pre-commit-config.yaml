@@ -1,0 +1,25 @@
+repos:
+  - repo: local
+    hooks:
+      - id: pytest-check
+        name: Run Pytest
+        entry: bash -c 'PYTHONPATH=src'
+        language: system
+        types: [python]
+
+  - repo: https://github.com/PyCQA/isort
+    rev: 5.13.2
+    hooks:
+      - id: isort
+        args: [ "--profile", "black" ]
+
+  - repo: https://github.com/psf/black
+    rev: 24.3.0
+    hooks:
+      - id: black
+
+  - repo: https://github.com/PyCQA/flake8
+    rev: 6.1.0
+    hooks:
+      - id: flake8
+

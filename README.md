@@ -14,32 +14,33 @@
 # 🧠 Архитектура проекта
 ```
 srgan-project/
+├── checkpoints            # Сохраненные модели 
+├── eencance_image         # Генерация увеличенного изображения   
 ├── models/
 │   ├── generator.py       # Архитектура генератора
 │   ├── discriminator.py   # Архитектура дискриминатора
-│   └── residual_block.py  # Остаточные блоки
-├── losses/
+│   ├── residual_block.py  # Остаточные блоки
 │   └── vgg_loss.py        # Реализация VGG-потерь
-├── utils/
-│   ├── trainer.py         # Логика обучения
-│   ├── logger.py          # Визуализация прогресса
-│   └── config.py          # Настройки параметров
-├── data/                  # Датасеты (не включено в репозиторий)
-├── outputs/               # Результаты работы модели
-└── train.py               # Основной скрипт обучения
+├── metrics                # Расчет метрик FID, PSNR, LPIPS  
+├── inputs                 # Изображения для обработки
+├── outputs                # Результат уеличения изображений    
+├── utils                  # Вспомогательные функции
+├── data/                  # Обработка и подготовка обучающего датасета
+├── main.py                # Основной скрипт обучения
+└── tests                  # Тесты
 ```
 
 
-## ⚙️ Установка
+# ⚙️ Установка
 
-1. Установка зависимостей:
+## 1. Установка зависимостей:
 ```bash
-pip install -r requirements.txt
+pip install -r requirements.txt requirements-dev.txt 
 ```
 
-2. Обучение модели
+## 2. Обучение модели
 
-- 2.1 Необходимая структура папок для обучения:
+### 2.1 Необходимая структура папок для обучения:
 ```
 src/data/
 ├── train/
@@ -50,19 +51,18 @@ src/data/
     └── hr/
 ```
 
-- 2.2 Запуск обучения:
+### 2.2 Запуск обучения:
 ```
-python train.py --data_dir ./data --epochs 100 --batch_size 16
-```
-
-- 2.3 Тестирование
-```
-python test.py --model generator.pth --test_dir ./data/val
-```
-
-- 2.4 Улучшение изображения
-```
-python inference.py --input input.jpg --output enhanced.jpg
+bash run_train.sh   
 ```
 
 
+### 2.3 Тестирование
+```
+Todo
+```
+
+### 2.4 Улучшение изображения
+```
+bash run_enhance.sh
+   
