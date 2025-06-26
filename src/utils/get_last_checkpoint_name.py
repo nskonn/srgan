@@ -1,8 +1,10 @@
 import os
 
+
 # Получаем список всех файлов в папке
 def get_all_files(directory):
     return os.listdir(directory)
+
 
 # Оставляем только те, что подходят под шаблон: checkpoints_XXX.pth
 def filter_checkpoint_files(files):
@@ -13,10 +15,12 @@ def filter_checkpoint_files(files):
 
     return checkpoints
 
+
 # Извлекаем число из имени файла
 def get_version_number(filename):
     # Например: "checkpoints_150.pth" -> 150
     return int(filename.split("_")[1].split(".")[0])
+
 
 # Находим файл с самой большой версией
 def find_latest_checkpoint(files):

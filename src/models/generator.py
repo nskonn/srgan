@@ -9,19 +9,11 @@ class Generator(nn.Module):
     def __init__(self, scale_factor=4):
         super(Generator, self).__init__()
 
-        self.conv1 = nn.Sequential(
-            nn.Conv2d(3, 64, 9, padding=4),
-            nn.PReLU()
-        )
+        self.conv1 = nn.Sequential(nn.Conv2d(3, 64, 9, padding=4), nn.PReLU())
 
-        self.res_blocks = nn.Sequential(
-            *[ResidualBlock(64) for _ in range(16)]
-        )
+        self.res_blocks = nn.Sequential(*[ResidualBlock(64) for _ in range(16)])
 
-        self.conv2 = nn.Sequential(
-            nn.Conv2d(64, 64, 3, padding=1),
-            nn.BatchNorm2d(64)
-        )
+        self.conv2 = nn.Sequential(nn.Conv2d(64, 64, 3, padding=1), nn.BatchNorm2d(64))
 
         self.upscale = nn.Sequential(
             nn.Conv2d(64, 256, 3, padding=1),
@@ -29,7 +21,7 @@ class Generator(nn.Module):
             nn.PReLU(),
             nn.Conv2d(64, 256, 3, padding=1),
             nn.PixelShuffle(2),
-            nn.PReLU()
+            nn.PReLU(),
         )
 
         self.final_conv = nn.Conv2d(64, 3, 9, padding=4)

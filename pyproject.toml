@@ -1,2 +1,2 @@
-[pytest]
-python_paths = src
+[tool.pytest.ini_options]
+pythonpath = ["src"]

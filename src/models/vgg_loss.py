@@ -1,6 +1,6 @@
 import torch
 from torch import nn
-from torchvision.models import vgg19, VGG19_Weights
+from torchvision.models import VGG19_Weights, vgg19
 
 
 # Перцептуальные потери на основе VGG19

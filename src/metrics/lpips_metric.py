@@ -1,24 +1,27 @@
-import lpips
-import torch
-import cv2
 import os
+
+import cv2
+import lpips
 import numpy as np
+import torch
 from tqdm import tqdm
 
 # Инициализация LPIPS с предобученной моделью (по умолчанию VGG)
-loss_fn = lpips.LPIPS(net='vgg', version='0.1')  # 'alex' или 'vgg'
+loss_fn = lpips.LPIPS(net="vgg", version="0.1")  # 'alex' или 'vgg'
 loss_fn.cpu()  # Для GPU. Для CPU: loss_fn.cpu()
 
 # Пути к папкам
-hr_dir = './images/hr'
-srgan_dir = './images/sr'
+hr_dir = "./images/hr"
+srgan_dir = "./images/sr"
 results = []
 
 # Получение списка файлов с расширениями .png и .jpg
-files = sorted([f for f in os.listdir(hr_dir) if f.lower().endswith(('.png', '.jpg', '.jpeg'))])
+files = sorted(
+    [f for f in os.listdir(hr_dir) if f.lower().endswith((".png", ".jpg", ".jpeg"))]
+)
 print("Текущая директория:", os.getcwd())
 # Обработка каждой пары изображений
-for filename in tqdm(files, desc='Calculating LPIPS'):
+for filename in tqdm(files, desc="Calculating LPIPS"):
     hr_path = os.path.join(hr_dir, filename)
     sr_path = os.path.join(srgan_dir, filename)
 
@@ -50,7 +53,7 @@ for filename in tqdm(files, desc='Calculating LPIPS'):
 # Расчет среднего, минимального и максимального значения
 if results:
     mean_lpips = np.mean(results)
-    print(f'Средний LPIPS: {mean_lpips:.4f}')
-    print(f'Минимальный: {np.min(results):.4f}, Максимальный: {np.max(results):.4f}')
+    print(f"Средний LPIPS: {mean_lpips:.4f}")
+    print(f"Минимальный: {np.min(results):.4f}, Максимальный: {np.max(results):.4f}")
 else:
     print("Нет доступных изображений для расчета LPIPS.")

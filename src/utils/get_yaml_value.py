@@ -1,6 +1,7 @@
-import yaml
-from pathlib import Path
 from functools import lru_cache
+from pathlib import Path
+
+import yaml
 
 
 class ConfigError(Exception):
@@ -10,7 +11,7 @@ class ConfigError(Exception):
 @lru_cache()
 def load_config(config_path: str = "../configs/train_config.yaml") -> dict:
     """Загружает и кэширует конфиг."""
-    path = Path('../configs/train_config.yaml')
+    path = Path("../configs/train_config.yaml")
     if not path.exists():
         raise ConfigError(f"Config file {config_path} not found!")
 
@@ -18,10 +19,12 @@ def load_config(config_path: str = "../configs/train_config.yaml") -> dict:
         return yaml.safe_load(f)
 
 
-def get_yaml_value(key: str, default=None, config_path: str = "../configs/train_config.yaml"):
+def get_yaml_value(
+    key: str, default=None, config_path: str = "../configs/train_config.yaml"
+):
     """Получает значение из конфига по ключу в формате 'nested.key'."""
     config = load_config(config_path)
-    keys = key.split('.')
+    keys = key.split(".")
     value = config
 
     try:
@@ -30,4 +33,3 @@ def get_yaml_value(key: str, default=None, config_path: str = "../configs/train_
         return value
     except (KeyError, TypeError):
         return default
-
