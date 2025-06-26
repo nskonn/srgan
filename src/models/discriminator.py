@@ -1,11 +1,9 @@
 import torch.nn as nn
 
-
 # Дискриминатор
 class Discriminator(nn.Module):
     def __init__(self):
         super(Discriminator, self).__init__()
-
         self.model = nn.Sequential(
             nn.Conv2d(3, 64, 3, stride=1, padding=1),
             nn.LeakyReLU(0.2),
