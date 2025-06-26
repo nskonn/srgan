@@ -11,8 +11,10 @@ from src.data.dataset import SRDataset
 from src.models.discriminator import Discriminator
 from src.models.generator import Generator
 from src.models.vgg_loss import VGGLoss
-from src.utils.get_last_checkpoint_name import (get_last_checkpoint_name,
-                                                get_version_number)
+from src.utils.get_last_checkpoint_name import (
+    get_last_checkpoint_name,
+    get_version_number,
+)
 
 
 # Инициализация весов
