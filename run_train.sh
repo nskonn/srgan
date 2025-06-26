@@ -5,4 +5,5 @@
 #  --output "outputs/result.jpg" \
 #  --checkpoint "checkpoints/checkpoint_14.pth"
 
+cd src
 python main.py

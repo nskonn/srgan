@@ -14,19 +14,20 @@
 # 🧠 Архитектура проекта
 ```
 srgan-project/
+├── checkpoints            # Сохраненные модели 
+├── eencance_image         # Генерация увеличенного изображения   
 ├── models/
 │   ├── generator.py       # Архитектура генератора
 │   ├── discriminator.py   # Архитектура дискриминатора
-│   └── residual_block.py  # Остаточные блоки
-├── losses/
+│   ├── residual_block.py  # Остаточные блоки
 │   └── vgg_loss.py        # Реализация VGG-потерь
-├── utils/
-│   ├── trainer.py         # Логика обучения
-│   ├── logger.py          # Визуализация прогресса
-│   └── config.py          # Настройки параметров
-├── data/                  # Датасеты (не включено в репозиторий)
-├── outputs/               # Результаты работы модели
-└── train.py               # Основной скрипт обучения
+├── metrics                # Расчет метрик FID, PSNR, LPIPS  
+├── inputs                 # Изображения для обработки
+├── outputs                # Результат уеличения изображений    
+├── utils                  # Вспомогательные функции
+├── data/                  # Обработка и подготовка обучающего датасета
+├── main.py                # Основной скрипт обучения
+└── tests                  # Тесты
 ```
 
 
@@ -34,7 +35,7 @@ srgan-project/
 
 ## 1. Установка зависимостей:
 ```bash
-pip install -r requirements.txt
+pip install -r requirements.txt requirements-dev.txt 
 ```
 
 ## 2. Обучение модели
@@ -52,27 +53,16 @@ src/data/
 
 ### 2.2 Запуск обучения:
 ```
-python train.py --data_dir ./data --epochs 100 --batch_size 16
+bash run_train.sh   
 ```
 
-- 50 изображений, 20 эпох, размер батча 8:
-```
-python train.py --limit 50 --epochs 20 --batch_size 8
-```
-
-- Полный датасет, 100 эпох, батч 16 (по умолчанию)
-```
-python train.py
-```
 
 ### 2.3 Тестирование
 ```
-python test.py --model generator.pth --test_dir ./data/val
+Todo
 ```
 
 ### 2.4 Улучшение изображения
 ```
-python inference.py --input input.jpg --output enhanced.jpg
-```
-
-
+bash run_enhance.sh
+   
